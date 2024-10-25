@@ -1,0 +1,121 @@
+package com.mvc.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.mvc.vo.Board;
+import com.mvc.vo.Movie;
+
+@Repository
+public class MovieDAOImpl implements MovieDAO {
+
+	@Autowired
+	DataSource pool;
+
+	@Override
+	public ArrayList<Movie> selectAll() {
+		ArrayList<Movie> list = new ArrayList<>();
+		String q = "select id, m.cinemacode, title, releasedate, runningtime, cinemaname, location from movie m join cinema c on m.cinemacode = c.cinemacode;";
+
+		try {
+			Connection con = pool.getConnection();
+			PreparedStatement stat = con.prepareStatement(q);
+
+			ResultSet rs = stat.executeQuery(q);
+			while (rs.next()) {
+				int id = rs.getInt(1);
+				int cinemacode = rs.getInt(2);
+				String name = rs.getString(3);
+				String releasedate = rs.getString(4);
+				int runningtime = rs.getInt(5);
+				String cinemaname = rs.getString(6);
+				String location = rs.getString(7);
+
+				Movie m = new Movie(id, cinemacode, name, releasedate, runningtime, cinemaname, location); // 생성자 하나 더 추가하기!!
+				list.add(m);
+			}
+
+			stat.close();
+			con.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+
+	@Override
+	public Movie selectOne(int id) {
+		Movie m = null;
+		String q = "select id, m.cinemacode, title, releasedate, runningtime, cinemaname, location from movie m join cinema c on m.cinemacode = c.cinemacode where id=?";
+		
+		try {
+			Connection con = pool.getConnection();
+			PreparedStatement stat = con.prepareStatement(q);
+			stat.setInt(1, id);
+
+			ResultSet rs = stat.executeQuery();
+			rs.next(); // 결과가 1건이므로 한번만 호출
+
+			int cinemacode = rs.getInt(2);
+			String name = rs.getString(3);
+			String releasedate = rs.getString(4);
+			int runningtime = rs.getInt(5);
+			String cinemaname = rs.getString(6);
+			String location = rs.getString(7);
+			
+			m = new Movie(id, cinemacode, name, releasedate, runningtime, cinemaname, location);
+			
+			stat.close();
+			con.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return m;
+	}
+
+	@Override
+	public int insert(Movie m) {
+		String q = "insert into movie(id, cinemacode, title, releasedate, runningtime) values(?,?,?,?,?)";
+
+		int res = -1;
+		
+		try {
+			Connection con = pool.getConnection();
+			PreparedStatement stat = con.prepareStatement(q);
+			stat.setInt(1, m.getId());
+			stat.setInt(2, m.getCinemaCode());
+			stat.setString(3, m.getTitle());
+			stat.setString(4, m.getReleaseDate());
+			stat.setInt(5, m.getRunningTime());
+
+			res = stat.executeUpdate();
+
+			stat.close();
+			con.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//System.out.println("데이터 삽입 완료!");
+		return res;
+	}
+
+	@Override
+	public int delete(int id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

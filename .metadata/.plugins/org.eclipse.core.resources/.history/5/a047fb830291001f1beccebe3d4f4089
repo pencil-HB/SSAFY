@@ -1,0 +1,178 @@
+package com.mvc.dao;
+
+import java.io.IOException;
+import java.io.Reader;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.sql.DataSource;
+
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.mvc.vo.Movie;
+import com.mvc.vo.User;
+
+@Repository
+public class MovieDAOImpl implements MovieDAO {
+
+	static String conf = "resources/Configuration.xml";
+	static Reader reader;
+	static SqlSession session;
+	
+	public MovieDAOImpl() throws IOException {
+		reader = Resources.getResourceAsReader(conf);
+		SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
+		SqlSessionFactory factory = builder.build(reader);
+		session = factory.openSession(true);
+	}
+	
+	@Autowired
+	DataSource pool;
+
+	@Override
+	public ArrayList<Movie> selectAll() {
+
+		List<Movie> list = session.selectList("selectAll");
+		
+		try {
+			Connection con = pool.getConnection();
+			PreparedStatement stat = con.prepareStatement(q);
+
+			ResultSet rs = stat.executeQuery(q);
+			while (rs.next()) {
+				int id = rs.getInt(1);
+				int cinemacode = rs.getInt(2);
+				String name = rs.getString(3);
+				String releasedate = rs.getString(4);
+				int runningtime = rs.getInt(5);
+				String cinemaname = rs.getString(6);
+				String location = rs.getString(7);
+
+				Movie m = new Movie(id, cinemacode, name, releasedate, runningtime, cinemaname, location); // 생성자 하나 더 추가하기!!
+				list.add(m);
+			}
+
+			stat.close();
+			con.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+
+	@Override
+	public Movie selectOne(int id) {
+		Movie m = null;
+		String q = "select id, m.cinemacode, title, releasedate, runningtime, cinemaname, location from movie m join cinema c on m.cinemacode = c.cinemacode where id=?";
+		
+		try {
+			Connection con = pool.getConnection();
+			PreparedStatement stat = con.prepareStatement(q);
+			stat.setInt(1, id);
+
+			ResultSet rs = stat.executeQuery();
+			rs.next(); // 결과가 1건이므로 한번만 호출
+
+			int cinemacode = rs.getInt(2);
+			String name = rs.getString(3);
+			String releasedate = rs.getString(4);
+			int runningtime = rs.getInt(5);
+			String cinemaname = rs.getString(6);
+			String location = rs.getString(7);
+			
+			m = new Movie(id, cinemacode, name, releasedate, runningtime, cinemaname, location);
+			
+			stat.close();
+			con.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return m;
+	}
+
+	@Override
+	public int insert(Movie m) {
+		String q = "insert into movie(id, cinemacode, title, releasedate, runningtime) values(?,?,?,?,?)";
+
+		int res = -1;
+		
+		try {
+			Connection con = pool.getConnection();
+			PreparedStatement stat = con.prepareStatement(q);
+			stat.setInt(1, m.getId());
+			stat.setInt(2, m.getCinemaCode());
+			stat.setString(3, m.getTitle());
+			stat.setString(4, m.getReleaseDate());
+			stat.setInt(5, m.getRunningTime());
+
+			res = stat.executeUpdate();
+
+			stat.close();
+			con.close();
+			//System.out.println("데이터 삽입 완료!");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	@Override
+	public int delete(int id) {
+		String q = "delete from movie where id = ?";
+
+		int res=-1;
+		try {
+			Connection con = pool.getConnection();
+			PreparedStatement stat = con.prepareStatement(q);
+			stat.setInt(1, id);
+
+			res = stat.executeUpdate();
+
+			stat.close();
+			con.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("데이터 삭제 완료!");
+		return res;
+	}
+
+	@Override
+	public boolean check(User u) {
+		boolean flag = false;
+		String q = "select id from user where id = ? and pw = ?;";
+		try {
+			Connection con = pool.getConnection();
+			PreparedStatement stat = con.prepareStatement(q);
+
+			stat.setString(1, u.getId());
+			stat.setString(2, u.getPw());
+
+			ResultSet rs = stat.executeQuery();
+
+			if (rs.next())
+				flag = true;
+			con.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return flag;
+	}
+
+}

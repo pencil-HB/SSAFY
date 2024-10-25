@@ -1,0 +1,17 @@
+1729833524278	Copy compilation unit
+1729833535334	Copy compilation unit
+1729833640011	Delete element
+1729833646484	Rename type 'User'
+1729833662669	Delete element
+1729833668385	Rename type 'Board'
+1729833786410	Rename type 'BoardController'
+1729833795050	Delete element
+1729834901027	Rename type 'BoardMapper'
+1729834907186	Rename type 'UserMapper'
+1729834914056	Rename type 'BoardServiceImpl'
+1729834918644	Rename type 'BoardService'
+1729834926194	Rename type 'UserService'
+1729834933814	Rename type 'UserServiceImpl'
+1729835164250	Rename resource 'BoardMapper.xml'
+1729835169819	Rename resource 'UserMapper.xml'
+1729837377611	Delete elements

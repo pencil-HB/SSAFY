@@ -1,0 +1,23 @@
+1729734353516	Delete element
+1729734379049	Rename resource 'BoardDAO.java'
+1729734862273	Rename resource 'Movie.xml'
+1729734981634	Move compilation unit
+1729736552428	Rename resource 'Board.xml'
+1729752237347	Rename type 'UserDAO'
+1729752257309	Move compilation unit
+1729752272386	Delete element
+1729752305514	Delete element
+1729752320746	Copy file
+1729838229390	Rename type 'Board'
+1729838293782	Rename type 'BoardMapper'
+1729838301785	Rename type 'User'
+1729838517013	Rename resource 'BoardMapper.xml'
+1729838523526	Rename resource 'UserMapper.xml'
+1729838976948	Rename type 'BoardController'
+1729839002985	Delete element
+1729839095566	Rename type 'BoardService'
+1729839101282	Rename type 'BoardServiceImpl'
+1729839105762	Rename type 'UserServiceImpl'
+1729839109726	Rename type 'UserService'
+1729839125371	Rename type 'UserMapper'
+1729839134778	Rename type 'UserController'

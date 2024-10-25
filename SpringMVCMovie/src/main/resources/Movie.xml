@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper file: 실행시킬 query를 가지고 있는 파일 -->
+
+<mapper namespace="Movie">
+
+	<select id="selectAll" resultType="Movie">
+		select id, m.cinemacode,
+		title, releasedate, runningtime, cinemaname, location from movie m
+		join cinema c on m.cinemacode = c.cinemacode
+	</select>
+
+	<select id="selectOne" resultType="Movie" parameterType="int">
+		select
+		id, m.cinemacode, title, releasedate, runningtime, cinemaname,
+		location from movie m join cinema c on m.cinemacode = c.cinemacode
+		where id=${num}
+	</select>
+
+	<insert id="insert" parameterType="Movie">
+		insert into movie(id,
+		cinemacode, title, releasedate, runningtime)
+		values(#{id},#{cinemaCode},#{title},#{releaseDate}, #{runningTime})
+	</insert>
+
+	<delete id="delete" parameterType="int">
+		delete from movie where id =
+		#{num}
+	</delete>
+
+	<select id="loginCheck" parameterType="User" resultType="String">
+		select id from user where
+		id = #{id} and pw = #{pw}
+	</select>
+
+	<!-- <update id="update" parameterType="Movie"> update customer set name=#{name}, 
+		address=#{address} where num = #{num} </update> -->
+
+</mapper>

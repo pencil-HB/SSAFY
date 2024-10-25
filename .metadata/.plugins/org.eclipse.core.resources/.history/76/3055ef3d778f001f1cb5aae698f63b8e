@@ -1,0 +1,75 @@
+package com.mvc.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.mvc.vo.Board;
+import com.mvc.vo.Movie;
+
+@Repository
+public class MovieDAOImpl implements MovieDAO {
+
+	@Autowired
+	DataSource pool;
+
+	@Override
+	public ArrayList<Movie> selectAll() {
+		ArrayList<Movie> list = new ArrayList<>();
+		String q = "select id, m.cinemacode, title, releasedate, runningtime, cinemaname, location from movie m join cinema c on m.cinemacode = c.cinemacode;";
+
+		try {
+			Connection con = pool.getConnection();
+			PreparedStatement stat = con.prepareStatement(q);
+
+			ResultSet rs = stat.executeQuery(q);
+			while (rs.next()) {
+				int id = rs.getInt(1);
+				int cinemacode = rs.getInt(2);
+				String name = rs.getString(3);
+				String releasedate = rs.getString(4);
+				int runningtime = rs.getInt(5);
+				String cinemaname = rs.getString(6);
+				String location = rs.getString(7);
+
+				Movie m = new Movie(id, cinemacode, name, releasedate, runningtime, cinemaname, location); // 생성자 하나 더 추가하기!!
+				list.add(m);
+			}
+
+			stat.close();
+			con.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+
+	@Override
+	public Movie selectOne(int id) {
+		Movie m = null;
+		String q = "select id, m.cinemacode, title, releasedate, runningtime, cinemaname, location from movie m join cinema c on m.cinemacode = c.cinemacode where id=?;"
+		return null;
+	}
+
+	@Override
+	public int insert(Movie m) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int delete(int id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

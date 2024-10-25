@@ -1,0 +1,39 @@
+package com.mvc.service;
+
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.mvc.vo.Movie;
+
+public class MovieServiceImpl implements MovieService {
+
+	@Autowired
+	MovieDAO dao;
+	
+	@Override
+	public ArrayList<Movie> selectAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Movie selectOne(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int insert(Movie m) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int delete(int id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	
+}

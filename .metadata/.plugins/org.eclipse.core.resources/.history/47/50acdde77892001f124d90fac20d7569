@@ -1,0 +1,37 @@
+package com.mybatis;
+
+import java.io.Reader;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.event.ListDataEvent;
+
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
+public class CustomerAppDynamic {
+	public static void main(String[] args) {
+		String conf = "res/Configuration.xml";
+		Reader reader;
+
+		try {
+			reader = Resources.getResourceAsReader(conf);
+			SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
+			SqlSessionFactory factory = builder.build(reader);
+			SqlSession session = factory.openSession(true); // true로 설정시 오토커밋, 없을시 session.commit 해줘야댐
+
+			List<Customer> list = session.selectList("selectAll");
+
+			for (Customer c : list) {
+				System.out.println(c);
+			}
+			
+			
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+}

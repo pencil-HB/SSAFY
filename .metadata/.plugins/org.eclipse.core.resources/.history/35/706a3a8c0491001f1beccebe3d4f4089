@@ -1,0 +1,6 @@
+package res;
+
+public class Snippet {
+	Error creating bean with name 'boardDAOImpl': Unsatisfied dependency expressed through field 'pool
+}
+

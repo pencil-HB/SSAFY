@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper file: 실행시킬 query를 가지고 있는 파일 -->
+
+<mapper namespace="com.mvc.mapper.BoardMapper">
+	<select id="selectAll" resultType="Board"> select * from board order by
+		num desc
+	</select>
+	<select id="selectOne" parameterType="string" resultType="Board"> select
+		* from board where num = #{xxx}
+	</select>
+	<update id="countUp" parameterType="String"> update board set count =
+		count+1 where num = #{num}
+	</update>
+	<delete id="delete" parameterType="string"> delete from board where num =
+		#{num}
+	</delete>
+	<update id="modify" parameterType="Board"> update board set title=
+		#{title}, pass = #{pass}, content = #{content} where num = #{num}
+	</update>
+	<insert id="insert" parameterType="Board">
+		insert into board(pass, name, title, wdate, content, count)
+		values(#{pass},#{name},#{title}, now() ,#{content}, #{count})
+	</insert>
+	
+	<select id="search" parameterType="map" resultType="Board">
+		select * from board
+		<if test='type eq "name"'>
+			where name = word order by num desc
+		</if>
+		<if test='type eq "title"'>
+			where title like #{word} order by num desc
+		</if>
+	</select>
+	
+	<insert id="txtest">
+		insert into board values("99", "123", "kim", sysdate(), "title", "content", 0)
+	</insert>
+</mapper>

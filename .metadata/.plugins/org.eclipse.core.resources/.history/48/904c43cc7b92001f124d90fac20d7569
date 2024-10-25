@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper file: 실행시킬 query를 가지고 있는 파일 -->
+
+<mapper namespace="Customer">
+
+	<resultMap type="Customer" id="EmpResult">
+		<result column="empid" property="num" />
+		<result column="fname" property="name" />
+		<result column="email" property="address" />
+	</resultMap>
+
+	<select id="selectAll" resultType="Customer">
+		select * from customer
+	</select>
+
+	<select id="selectOne" resultType="Customer"
+		parameterType="string">
+		select * from customer where num = #{num}
+	</select>
+
+	<insert id="insert" parameterType="Customer">
+		insert into customer values
+		(#{num}, #{name}, #{address} )
+	</insert>
+
+	<delete id="delete" parameterType="String">
+		delete from customer where
+		num= #{num}
+	</delete>
+
+	<update id="update" parameterType="Customer">
+		update customer set
+		name=#{name}, address=#{address} where num = #{num}
+	</update>
+
+	<select id="selectIdNameDeptName" resultType="hashMap">
+		select empid,
+		fname, deptname from emp join dept using (deptid)
+	</select>
+
+	<select id="selectMore" resultMap="EmpResult"
+		parameterType="map">
+		select empid, fname, deptid
+		from emp
+		where deptid = 50
+		<if test="fname != null">
+			and fname like concat('%', #{fname}, '%')
+		</if>
+	</select>
+
+	<select id="selectMore2" resultMap="EmpResult"
+		parameterType="map">
+		select empid, fname, deptid
+		from emp
+		<if test="deptid != null">where deptid = #{deptid}</if>
+		<if test="jobid != null">where jobid = #{jobid}</if>
+	</select>
+
+	<select id="selectMore3" resultMap="EmpResult"
+		parameterType="map">
+		select empid, fname, email
+		from emp
+		where deptid is not null
+		<choose>
+			<when test="jobid != null">and jobid = #{jobid}</when>
+			<when test="email != null">and email like concat('%', #{email}, '%')</when>
+			<otherwise>and fname like concat('%', #{fname}, '%')</otherwise>
+		</choose>
+	</select>
+
+	<select id="selectForEach" resultMap="EmpResult">
+		select empid, fname, deptid
+		from emp
+		where deptid in (
+		<foreach collection="array" item="one" separator=",">
+			#{one}
+		</foreach>
+		)
+	</select>
+
+</mapper>

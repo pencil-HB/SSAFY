@@ -1,0 +1,13 @@
+package com.mvc.vo;
+
+//vo: board 테이블 안의 레코드, 한 건의 정보를 표현하기 위한 클래스_pojo
+public class Product {
+	private String code;
+	private String model;
+	private String price;
+	private String id;
+	private String regist_date;
+	private String detail;
+	
+	
+}

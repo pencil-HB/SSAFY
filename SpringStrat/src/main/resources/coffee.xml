@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	
+	default-lazy-init="true"
+	
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- container 가 읽어 들여서 객체를 만들어 줌 -->
+	
+	<!-- com.coffee3.Americano cof1 = new com.coffee3.Americano(); -->
+	<bean id="cof0" class="com.coffee3.Americano"/> 
+	<!-- 기본은 싱글톤이고 싱글톤이면 하나만 나옴! -->
+	<bean id="cof1" class="com.coffee3.Americano"/>
+<!-- 	기본은 default 이고 lazy면 호출할 때 객체가 만들어진다. -->
+	<bean id="cof2" class="com.coffee3.CafeLatte"/>
+	
+</beans>

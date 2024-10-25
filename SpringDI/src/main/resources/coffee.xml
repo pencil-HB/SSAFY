@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- container 가 읽어 들여서 객체를 만들어 줌 -->
+
+	<bean id="star" class="com.coffee.Starbucks">
+		<constructor-arg name="ame" ref="ame1"></constructor-arg>
+		<constructor-arg name="latte" ref="latte1"></constructor-arg>
+	</bean>
+	
+	<bean id="mega" class="com.coffee.MegaCoffee">
+		<property name="ame" ref="ame2"></property>
+		<property name="latte">
+			<bean class="com.coffee.CafeLatte">
+				<constructor-arg name="price" value="4000"></constructor-arg>
+				<property name="origin" value="ethiopia"></property>				
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="ame1" class="com.coffee.Americano">
+		<constructor-arg name="price" value="5000"></constructor-arg>
+		<property name="origin" value="kenya"></property> <!-- setter 호출 -->
+	</bean>
+
+	<bean id="latte1" class="com.coffee.CafeLatte">
+		<constructor-arg name="price" value="6500"></constructor-arg>
+		<property name="origin" value="india"></property>
+	</bean>
+	
+	<bean id="ame2" class="com.coffee.Americano">
+		<constructor-arg name="price" value="3000"></constructor-arg>
+		<property name="origin" value="vietnam"></property> <!-- setter 호출 -->
+	</bean>
+
+	<bean id="latte2" class="com.coffee.CafeLatte">
+		<constructor-arg name="price" value="4000"></constructor-arg>
+		<property name="origin" value="brazil"></property>
+	</bean>
+
+</beans>

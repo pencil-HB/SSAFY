@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+	<!-- target 객체 생성 -->
+	<bean id="free" class="com.board.FreeBoard"></bean>
+
+	<!-- Aspect 객체 생성 -->
+	<bean id="ba" class="com.board.BoardAspect"></bean>
+
+	<!-- proxy 자동 생성을 위한 빈 태그 aop-include 에 등록된 Aspect를 찾아 Pointcut의 내용과 일치할 
+		때 동작할 프록시를 자동으로 생성해 줌 -->
+
+	<aop:aspectj-autoproxy>
+		<aop:include name="ba" />
+	</aop:aspectj-autoproxy>
+
+</beans>
