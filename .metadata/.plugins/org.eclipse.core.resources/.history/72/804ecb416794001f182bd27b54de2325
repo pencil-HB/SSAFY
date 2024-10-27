@@ -1,0 +1,28 @@
+package com.mvc.mapper;
+
+import com.mvc.vo.Product;
+import java.util.List;
+
+public interface ProductMapper {
+
+    // 전체 조회
+    List<Product> selectAll();
+
+    // 이름으로 조회
+    Product selectByName(String memberName);
+
+    // 코드로 조회
+    Product selectByCode(String code);
+
+    // 제품 삽입
+    int insertProduct(Product product);
+
+    // 제품 업데이트
+    int updateProduct(Product product);
+
+    // 제품 삭제
+    int deleteProduct(String code);
+    
+ // 날짜로 조회
+    List<Product> selectByDate(Map<String, Date> dateRange);
+}

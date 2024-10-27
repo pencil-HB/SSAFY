@@ -8,5 +8,5 @@ import com.mvc.vo.Member;
 public interface MemberMapper {
 
 	Member check(Member u);
-
+	int insertMember(Member member);
 }

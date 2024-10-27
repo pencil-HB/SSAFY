@@ -1,7 +1,10 @@
 package com.mvc.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -48,15 +51,37 @@ public class ProductController {
 
 		return "list";
 	}
+	
+	@GetMapping("/searchDate")
+	public String searchDate(@RequestParam("searchDate") String dateString, HttpSession session, Model model) {
+	    String admin = (String) session.getAttribute("admin");
+	    ArrayList<Product> list;
+
+	    System.out.println(dateString);
+		// 관리자 여부 확인
+		if ("yes".equals(admin)) {
+		    // 관리자: 전체 제품에서 날짜별 필터링
+		    list = new ArrayList<>(service.getProductsByDate(dateString));
+		} else {
+		    // 일반 사용자: 사용자별 제품에서 날짜별 필터링
+		    Member user = (Member) session.getAttribute("user");
+		    list = (ArrayList<Product>) service.getUserProductsByDate(user.getId(), dateString);
+		}
+
+	    model.addAttribute("list", list); // 검색된 결과를 기존 list 뷰에 전달
+	    return "list";
+	}
+
+
 
 	@GetMapping("/read")
 	//public String read(HttpServletRequest request, Model model) {
-	public String read(@RequestParam("num") String num, Model model) throws Exception {
+	public String read(@RequestParam("code") String code, Model model) throws Exception {
 //		if(num.equals("17")) {
 //			throw new Exception();
 //		}
 		
-		Product b = service.selectOne(num);
+		Product b = service.getProductByCode(code);
 
 		model.addAttribute("b", b);
 		return "read";
@@ -70,35 +95,25 @@ public class ProductController {
 	}
 
 	@PostMapping("/registProcess")
-	public String insertProcess(@ModelAttribute Product b) {		
-		int x = service.insert(b);
+	public String insertProcess(@ModelAttribute Product b) {
+		System.out.println(b);
+		boolean x = service.addProduct(b);
 		
 		return "redirect:/list";
 	}
 
 	@GetMapping("/delete")
-	public String delete(@RequestParam("num") String num) {
-		service.delete(num);
+	public String delete(@RequestParam("code") String code) {
+		service.deleteProduct(code);
 		
 		return "redirect:/list";
-	}
-
-	@PostMapping("/search")
-	public String search(HttpServletRequest request, HttpServletResponse response, Model model) {
-		String search = request.getParameter("search");
-		String word = "%"+request.getParameter("word")+"%";
-		
-		ArrayList<Product> list = service.search(search,word);
-		
-		model.addAttribute("list", list);
-		
-		return "list";
 	}
 
 	@ExceptionHandler(Exception.class)
 	public ModelAndView handleException(Exception e) {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("msg", "exception 발생~ ㅜㅜ");
+		e.printStackTrace();
 		mv.setViewName("error/error");
 		return mv;
 	}

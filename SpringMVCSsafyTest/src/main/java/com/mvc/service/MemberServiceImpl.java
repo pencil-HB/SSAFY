@@ -15,7 +15,11 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public Member check(Member u) {
-		return mapper.check(u); //u 안에 id랑 pw들어있음
+		return mapper.check(u); // u 안에 id랑 pw들어있음
 	}
 
+	@Override
+	public boolean registerMember(Member member) {
+		return mapper.insertMember(member) > 0;
+	}
 }

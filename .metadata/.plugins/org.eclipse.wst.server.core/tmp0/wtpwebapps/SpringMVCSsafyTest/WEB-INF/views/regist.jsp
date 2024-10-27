@@ -70,6 +70,7 @@ button.btn-secondary {
 		</div>
 		<div>
 			<c:if test="${user == null}">
+			<a href="signUp">회원가입</a>
 				<a href="loginForm">로그인</a>
 			</c:if>
 			<c:if test="${user != null }">
@@ -83,7 +84,7 @@ button.btn-secondary {
 	<div
 		style="max-width: 800px; margin: 20px auto; padding: 20px; background-color: white; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
 		<h2>상품 정보 등록</h2>
-		<form id="registForm" method="post" action="">
+		<form id="registForm" method="post" action="registProcess">
 			<label for="productCode">고유번호</label> 
 			<input type="text" id="productCode" name="code" placeholder="고유번호 입력"> 
 			<label for="model">모델명</label> 
@@ -91,7 +92,7 @@ button.btn-secondary {
 			<label for="price">가격</label>
 			<input type="number" id="price" name="price" placeholder="가격 입력"> 
 			<label for="userId">등록자 ID</label> 
-			<input type="text" id="userId" name="userId"> 
+			<input type="text" id="userId" name="id"> 
 			<label for="description">상세설명</label>
 			<textarea id="description" name="detail"></textarea>
 

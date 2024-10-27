@@ -1,6 +1,9 @@
 package com.mvc.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,43 +32,48 @@ public class ProductServiceImpl implements ProductService {
 		return mapper.selectByName(memberName);
 	}
 
-	@Override
-	public Product selectOne(String num) {
-		mapper.countUp(num);
-		return mapper.selectOne(num);
-	}
+	// 제품을 코드로 조회
+    public Product getProductByCode(String code) {
+        return mapper.selectByCode(code);
+    }
 
-	@Override
-	public int insert(Product b) {
-		int res = mapper.insert(b);
-		return res;
+    // 새로운 제품 등록
+    public boolean addProduct(Product product) {
+        return mapper.insertProduct(product) > 0;
+    }
 
-	}
+    // 제품 정보 업데이트
+    public boolean updateProduct(Product product) {
+        return mapper.updateProduct(product) > 0;
+    }
 
-	@Override
-	public void delete(String num) {
-		mapper.delete(num);
+    // 제품 삭제
+    public boolean deleteProduct(String code) {
+        return mapper.deleteProduct(code) > 0;
+    }
 
-	}
+    @Override
+    public ArrayList<Product> getProductsByDate(String dateString) {
+        ArrayList<Product> products = new ArrayList<>();
+        try {
+            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dateString);
+            products = mapper.selectBySpecificDate(date);
+        } catch (ParseException e) {
+            e.printStackTrace(); // 날짜 형식 오류 처리
+        }
+        return products;
+    }
 
-	@Override
-	public ArrayList<Product> search(String type, String word) {
-		
-		HashMap<String, String> map = new HashMap<>();
-		map.put("type", type);
-		map.put("word", word);
-		
-		return mapper.search(map);
-
-	}
-
-	@Override
-	@Transactional
-	public void txtest() {
-		mapper.txtest();
-		mapper.txtest();
-		
-		return;
-	}
+    @Override
+    public ArrayList<Product> getUserProductsByDate(String userId, String dateString) {
+        ArrayList<Product> products = new ArrayList<>();
+        try {
+            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dateString);
+            products = new ArrayList<>(mapper.selectUserProductsByDate(userId, date));
+        } catch (ParseException e) {
+            e.printStackTrace(); // 날짜 형식 오류 처리
+        }
+        return products;
+    }
 
 }

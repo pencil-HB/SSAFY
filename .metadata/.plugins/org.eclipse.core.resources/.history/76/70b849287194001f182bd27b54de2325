@@ -1,0 +1,77 @@
+package com.mvc.service;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.mvc.mapper.ProductMapper;
+import com.mvc.vo.Product;
+
+//BoardService의 메소드를 구현한 객체
+//컨트롤러에게서 들어온 요청을 처리함(mapper에게 넘김)
+@Service
+public class ProductServiceImpl implements ProductService {
+	// 1. mapper한테 넘겨야하니까 mapper있어야함
+	@Autowired
+	ProductMapper mapper; //proxy 객체가 주입된다.
+
+	@Override
+	public ArrayList<Product> selectAll() {
+		return mapper.selectAll();
+	}
+	
+	@Override
+	public ArrayList<Product> selectByName(String memberName) {
+		return mapper.selectByName(memberName);
+	}
+
+	// 제품을 코드로 조회
+    public Product getProductByCode(String code) {
+        return mapper.selectByCode(code);
+    }
+
+    // 새로운 제품 등록
+    public boolean addProduct(Product product) {
+        return mapper.insertProduct(product) > 0;
+    }
+
+    // 제품 정보 업데이트
+    public boolean updateProduct(Product product) {
+        return mapper.updateProduct(product) > 0;
+    }
+
+    // 제품 삭제
+    public boolean deleteProduct(String code) {
+        return mapper.deleteProduct(code) > 0;
+    }
+
+    @Override
+    public ArrayList<Product> getProductsByDate(String dateString) {
+        ArrayList<Product> products = new ArrayList<>();
+        try {
+            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dateString);
+            products = mapper.selectBySpecificDate(date);
+        } catch (ParseException e) {
+            e.printStackTrace(); // 날짜 형식 오류 처리
+        }
+        return products;
+    }
+
+    @Override
+    public ArrayList<Product> getUserProductsByDate(String userId, String dateString) {
+        ArrayList<Product> products = new ArrayList<>();
+        try {
+            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dateString);
+            products = new ArrayList<>(mapper.selectUserProductsByDate(userId, date));
+        } catch (ParseException e) {
+            e.printStackTrace(); // 날짜 형식 오류 처리
+        }
+        return products;
+    }
+
+}

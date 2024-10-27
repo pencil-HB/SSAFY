@@ -1,0 +1,25 @@
+package com.mvc.service;
+
+import com.mvc.vo.Product;
+import java.util.ArrayList;
+
+public interface ProductService {
+
+    // 모든 제품 조회
+    ArrayList<Product> selectAll();
+
+    // 이름으로 제품 조회
+    ArrayList<Product> selectByName(String memberName);
+
+    // 코드로 제품 조회
+    Product getProductByCode(String code);
+
+    // 제품 추가
+    boolean addProduct(Product product);
+
+    // 제품 업데이트
+    boolean updateProduct(Product product);
+
+    // 제품 삭제
+    boolean deleteProduct(String code);
+}

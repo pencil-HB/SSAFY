@@ -2,6 +2,7 @@ package com.mvc.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -62,10 +63,28 @@ public class MemberController {
 	}
 
 	@GetMapping(value = "/logout")
-	public String logout(HttpSession session) {// 세션에t
+	public String logout(HttpSession session) {
 		session.setAttribute("user", null);
 		session.setAttribute("admin", null);
 
 		return "redirect:/list";// view name
 	}
+	
+	// 회원가입 폼 이동
+    @GetMapping("/signUp")
+    public String showRegisterForm() {
+        return "signUp";
+    }
+
+    @PostMapping("/signUp")
+    public String register(Member member, RedirectAttributes redirectAttributes) {
+        boolean success = service.registerMember(member);
+        if (success) {
+            redirectAttributes.addFlashAttribute("message", "회원가입이 완료되었습니다.");
+            return "redirect:/loginForm"; // 회원가입 후 로그인 페이지로 이동
+        } else {
+            redirectAttributes.addFlashAttribute("message", "회원가입에 실패했습니다. 다시 시도해 주세요.");
+            return "redirect:/signUp";
+        }
+    }
 }

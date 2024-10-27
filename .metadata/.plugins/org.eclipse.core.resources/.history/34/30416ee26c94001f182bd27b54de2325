@@ -1,0 +1,29 @@
+package com.mvc.service;
+
+import com.mvc.vo.Product;
+import java.util.ArrayList;
+import java.util.Date;
+
+public interface ProductService {
+
+    // 모든 제품 조회
+    ArrayList<Product> selectAll();
+    
+    // 코드로 제품 조회
+    Product getProductByCode(String code);
+
+    // 제품 추가
+    boolean addProduct(Product product);
+
+    // 제품 업데이트
+    boolean updateProduct(Product product);
+
+    // 제품 삭제
+    boolean deleteProduct(String code);
+    
+    ArrayList<Product> search(String search, String word);
+
+	ArrayList<Product> selectByName(String id);
+
+	Object getUserProductsByDate(String id, Date date);
+}

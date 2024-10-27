@@ -51,6 +51,7 @@ h1 {
 		</div>
 		<div>
 			<c:if test="${user == null}">
+				<a href="signUp">회원가입</a>
 				<a href="loginForm">로그인</a>
 			</c:if>
 			<c:if test="${user != null }">

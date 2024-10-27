@@ -9,4 +9,9 @@
 	<select id="check" parameterType="Member" resultType="Member">
 		select * from members where id = #{id} and password = #{password}
 	</select>
+	
+	<insert id="insertMember" parameterType="Member">
+        INSERT INTO members (id, name, password)
+        VALUES (#{id}, #{name}, #{password})
+    </insert>
 </mapper>

@@ -21,8 +21,12 @@
 	Product b = (Product) request.getAttribute("b");
 	%>
 	<div class="container text-center">
-		
-
+		<h1>${b.code }</h1>
+		<h3>${b.model }</h3>
+		<h4>${b.price }원</h4>
+		등록자 : ${b.id }
+		<hr>
+		<a href="delete?code=${b.code }">삭제하기</a>
 	</div>
 </body>
 </html>

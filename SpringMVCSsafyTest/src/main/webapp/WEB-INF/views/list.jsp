@@ -71,6 +71,7 @@ input[type="date"], input[type="submit"] {
 		</div>
 		<div>
 			<c:if test="${user == null}">
+			<a href="signUp">회원가입</a>
 				<a href="loginForm">로그인</a>
 			</c:if>
 			<c:if test="${user != null }">
@@ -83,7 +84,7 @@ input[type="date"], input[type="submit"] {
 
 	<div class="container">
 		<h1>상품 목록</h1>
-		<form method="get">
+		<form method="get" action="searchDate">
 			<label for="searchDate">날짜 검색:</label> <input type="date"
 				id="searchDate" name="searchDate"> <input
 				type="submit" value="검색">
@@ -98,7 +99,7 @@ input[type="date"], input[type="submit"] {
 			</tr>
 			<c:forEach var="p" items="${list }">
 				<tr>
-					<td><a href="">${p.id }</a></td>
+					<td><a href="read?code=${p.code }">${p.code }</a></td>
 					<td>${p.model }</td>
 					<td>${p.price }</td>
 					<td>${p.id }</td>

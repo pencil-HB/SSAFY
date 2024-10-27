@@ -1,21 +1,38 @@
 package com.mvc.mapper;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Date;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.mvc.vo.Product;
 
-//Controller를 위한 인터페이스
 @Mapper
 public interface ProductMapper {
-	public ArrayList<Product> selectAll();//모든 글정보
-	public Product selectOne(String num);//해당 번호의 글 하나
-	public int insert(Product b);//새글 등록
-	public void delete(String num);//글 삭제
-	public void countUp(String num);
-	public ArrayList<Product> search(HashMap<String, String> map);
-	public void txtest();
-	public ArrayList<Product> selectByName(String memberName);
+
+	// 전체 조회
+	ArrayList<Product> selectAll();
+
+	// 이름으로 조회
+	ArrayList selectByName(String memberName);
+
+	// 코드로 조회
+	Product selectByCode(String code);
+
+	// 제품 삽입
+	int insertProduct(Product product);
+
+	// 제품 업데이트
+	int updateProduct(Product product);
+
+	// 제품 삭제
+	int deleteProduct(String code);
+
+	// 날짜로 조회
+	ArrayList<Product> selectBySpecificDate(Date date);
+
+	// 사용자별 특정 날짜로 조회
+	List<Product> selectUserProductsByDate(@Param("userId") String userId, @Param("date") Date date);
 }
