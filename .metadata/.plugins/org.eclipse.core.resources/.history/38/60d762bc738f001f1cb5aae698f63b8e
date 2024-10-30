@@ -1,9 +1,0 @@
-package com.mvc.service;
-
-import java.util.ArrayList;
-
-import com.mvc.vo.Movie;
-
-public interface MovieService {
-	public ArrayList<Movie> selectAll();
-}

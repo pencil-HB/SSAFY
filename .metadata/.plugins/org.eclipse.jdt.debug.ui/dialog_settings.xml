@@ -2,7 +2,7 @@
 <section name="Workbench">
 	<section name="org.eclipse.jdt.debug.ui.MAIN_METHOD_SELECTION_DIALOG">
 		<item key="ShowStatusLine" value="true"/>
-		<item key="History" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0D;&#x0A;&lt;History&gt;&#x0D;&#x0A;&lt;historyRootNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=board/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&amp;lt;com.ssafy.board.main{BoardMain.java[BoardMain&lt;/infoNode&gt;&#x0D;&#x0A;&lt;/historyRootNode&gt;&#x0D;&#x0A;&lt;/History&gt;"/>
+		<item key="History" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0D;&#x0A;&lt;History&gt;&#x0D;&#x0A;&lt;historyRootNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=board/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&amp;lt;com.ssafy.board.main{BoardMain.java[BoardMain&lt;/infoNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=SpringBootCustomer/C:\/Users\/SSAFY\/.m2\/repository\/org\/mybatis\/mybatis\/3.5.14\/mybatis-3.5.14.jar=/maven.pomderived=/true=/=/org.eclipse.jst.component.archivename=/mybatis-3.5.14.jar=/=/maven.groupId=/org.mybatis=/=/maven.artifactId=/mybatis=/=/maven.version=/3.5.14=/=/maven.scope=/compile=/=/maven.pomderived=/true=/=/org.eclipse.jst.component.dependency=/\/WEB-INF\/lib=/&amp;lt;org.apache.ibatis.javassist.tools.rmi(AppletServer.class[AppletServer&lt;/infoNode&gt;&#x0D;&#x0A;&lt;/historyRootNode&gt;&#x0D;&#x0A;&lt;/History&gt;"/>
 		<section name="DialogBoundsSettings">
 			<item key="DIALOG_HEIGHT" value="500"/>
 			<item key="DIALOG_WIDTH" value="600"/>

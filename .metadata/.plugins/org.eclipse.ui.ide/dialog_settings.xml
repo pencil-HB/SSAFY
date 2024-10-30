@@ -37,18 +37,20 @@
 		<item value="org.sonatype.m2e.egit.feature:0.17.0.202209271423"/>
 	</list>
 	<section name="ExternalProjectImportWizard">
-		<item key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED" value="false"/>
+		<item key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED" value="true"/>
 		<item key="WizardProjectsImportPage.STORE_CLOSE_CREATED_PROJECTS_ID" value="false"/>
 		<item key="WizardProjectsImportPage.STORE_HIDE_CONFLICTING_PROJECTS_ID" value="false"/>
 		<item key="WizardProjectsImportPage.STORE_NESTED_PROJECTS" value="false"/>
 		<item key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID" value="false"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="C:\ssafyhb\SpringLecture\SpringRestCustomer.zip_expanded"/>
 			<item value="C:\ssafyhb\SpringLecture\SpringMVCMyBatis"/>
 			<item value="C:\ssafyhb\SpringLecture\SpringMVCMyBatis (2)"/>
 			<item value="C:\ssafy\MVCBoard"/>
 			<item value=""/>
 		</list>
 		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
+			<item value="C:\Users\SSAFY\Downloads\SpringRestCustomer.zip"/>
 			<item value=""/>
 			<item value="C:\Users\SSAFY\Downloads\SpringStart.zip"/>
 		</list>
@@ -66,21 +68,23 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="C:\Users\SSAFY\Downloads\SpringRestCustomer.zip"/>
+			<item value="C:\ssafyhb\FrameworkGit\framework\1028_REST_API\01_skeleton\board5-restapi"/>
 			<item value="C:\Users\SSAFY\Downloads\SpringMVCMyBatis.zip"/>
 			<item value="C:\ssafyhb\실습\spring_ws_03_b"/>
 			<item value="C:\ssafyhb\실습\spring_ws_02_2"/>
 			<item value="C:\ssafyhb\SpringLecture\spring_ws_01_2"/>
 		</list>
 		<section name="SmartImportWizard.dialogBounds">
-			<item key="DIALOG_X_ORIGIN" value="80"/>
+			<item key="DIALOG_X_ORIGIN" value="-132"/>
 			<item key="DIALOG_Y_ORIGIN" value="186"/>
-			<item key="DIALOG_WIDTH" value="888"/>
+			<item key="DIALOG_WIDTH" value="1100"/>
 			<item key="DIALOG_HEIGHT" value="629"/>
 			<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
 		</section>
 	</section>
 	<section name="ChooseWorkspaceDialogSettings">
-		<item key="DIALOG_X_ORIGIN" value="379"/>
+		<item key="DIALOG_X_ORIGIN" value="325"/>
 		<item key="DIALOG_Y_ORIGIN" value="341"/>
 	</section>
 	<section name="WORKBENCH_SETTINGS">
